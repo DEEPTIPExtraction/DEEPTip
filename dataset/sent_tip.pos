@@ -1,0 +1,1110 @@
+1	note: in_array performs a linear search of the array contents, which might not be the best way to go if one or more of the following conditions are true:
+18	here is the link for the escape string, but you may want to consider the best alternative, and that is to paramterize the inserts
+19	you have to use session_start() at the top of all your html sites, otherwise you loose reference to the session and to all its stored variables.
+29	please discontinue the use of mysql_* , it is no longer secure or safe to use, and there are much better alternatives.
+30	i would suggest mysqli_* or pdo .
+31	use either $_server['http_referer'] or have a hidden post value sent with the form to identify the page or form sending the data.
+32	you can get the base url using $_server['http_host'] you may need to append http/https to the string.
+33	you can also then use $_server['request_uri'] to get the remainder of the url.
+38	i also will note that you should use prepared statements with pdo or mysqli as it is better protection than using mysql_real_escape_string.
+43	session_start(); shouldn't be in your if condition, it has to be at the beginning of the script and always launched
+71	add error reporting to the top of your file(s) which will help find errors.
+73	in php, preg_match will return 1 if the match succeeds and 0 if it fails.
+89	this uses mysqli and prepared statements ( for security ), instead of the depracated mysql extension ( in php 5.5 )
+117	sidenote : this( mysql_* ) extension is deprecated as of php 5.5.0 , and will be removed in the future.
+118	instead, the mysqli or pdo_mysql extension should be used.
+119	switching to preparedstatements is even more better to ward off sql injection attacks !
+128	you need to look into mysqli or pdo to sanitize your input...
+163	if you want to fetch data you have to use select statement not insert statement.
+186	also, as a side note, every line in php needs a semicolon ; at the end of it.
+188	i would recommend using jquery to listen for events as well.
+209	pdostatement::execute() only returns a boolean indicating success or failure, so your variable $num is not what you want to fetch from.
+220	sql injections are prevented by parametrized queries (a must-have this day and age); and html injections are prevented by htmlspecialchars() method, which should be called right before outputting the string to the user .
+221	don't store encoded strings in the db or (even worse) - encode them as soon as receiving them.
+246	just a sidenote: mysql is deprecated, i would advise using mysqli or pdo
+260	put session_start(); at the top of your php file.
+264	by storing your data in the $_session array you will have access to that data in every php script the user accesses.
+265	in order to have access to the session array you must call session_start(); before accessing the $_session array.
+266	remember to only call session_start only once per php execution.
+267	if session_start is called multiple times is will generate a warning or an error (i don't remember which)
+268	you can check if the $_session array is set to know if the session has been started
+277	suggestion : try not to use mysql_* functions as they are deprecated now!
+317	you don't escape the values, therefore open an sql injection.
+329	for a shopping website it is really important that the website will load as fast as possible, so that the customers enjoy shopping and staying on the site.
+344	you can use the substr function : http://www.php.net/manual/en/function.substr.php and if you don't know the position of the word, use strpos to get it : http://php.net/manual/en/function.strpos.php
+355	instead, you should use the correct function (such as htmlspecialchars or mysqli_real_escape_string ) to escape the input before you use it.
+379	mysqli_* offers both procedural and oo style, but please, don't mix the two.
+405	now, your able to fetch all your data from the array using foreach loop and please use pdo to avoid sql injection.
+430	there are a number of problems with the way in which you're attempting to insert the data, but i believe the reason that you're not having any output is because standard mysql commands are deprecated as of php 5.5, and removed as of php 7.0. instead, you should be using mysqli, or preferably, pdo.
+433	pdo is more secure, but harder to learn, and not all web hosts support it -- make sure to check with your hosting provider!
+435	without using a prepared query, you're leaving yourself vulnerable to sql injection.
+436	a prepared query binds the parameters being passed through, so they can't be manipulated.
+444	please don't use mysql_* it is deprecated and removed from php 7.
+453	if you really dont want to reload the whole page, the only way to do it is to use an ajax request to a page where your php code is.
+462	php's built-in file function can get file contents into array.
+495	php://input is a read-only stream that allows you to read raw data from the request body.
+496	in the case of post requests, it is preferable to use php://input instead of $http_raw_post_data as it does not depend on special php.ini directives.
+514	array_push is a built in php function to add an element to the end of an array.
+515	i think you're looking for array_pluck , which is a laravel helper function to pluck a specific key from all the items in an array of arrays or array of objects.
+522	you should look at moving to mysqli_* or pdo - mysql_* is being deprecated.
+523	you can do multiple queries in one call directly using mysqli, too; and they both make use of bound parameters, which helps you write more secure code.
+528	also, your current queries are ripe for sql injection, and myslq_ functions should not be used for new development.
+531	please don't use mysql_* functions, use mysqli or pdo instead.
+534	you have to add &lt;?php session_start(); ?&gt; on the top of every page where you'd like to use the $_session[] variables.
+540	note i am not getting in the details of the many issues your actual code has: first of all that is open to sql injections as many has already pointed out: take a bit of time to see what prepared statements are.
+601	unchecked checkboxes don't get submitted to the server.
+613	trim removes leading and trailing white-space.
+620	and you have to start_session() at the top of all your files.
+647	note: many answers will invariably suggest you not use mysql, but pdo or mysqli.
+654	if you reload the page after submitting a form, it will keep the post data.
+659	obligatory suggestion , don't use mysql_* functions in new code .
+672	alternatively you could use fetchall to select whole dataset into a variable.
+688	as suggested, try var_dumping the content of both $_server and $_session at the beginning of session_check() to see what they contain.
+706	empty() returns true if the values is a empty string, while !isset() will return false.
+710	you can use array_values (to get the values and ignore the keys ).
+758	one advantage of using query parameters is you never need to worry about where you start and end your quotes.
+759	if you must interpolate variables into your sql, first make sure you protect the variables either by coercing the value to an integer, or else by using a proper escaping function like mysqli_real_escape_string().
+760	don't put $_post variables directly into the string.
+761	also you don't have to stop and restart the quotes if you use php's syntax for embedding variables directly in double-quoted strings:
+774	you should use mysqli and not mysql as it is deprecated secondly, you should check if($results-&gt;num_rows === 0) and do your insert
+804	and you can check this other post for reasons why mysql_* methods were deprecated: why shouldn't i use mysql_* functions in php?
+819	well, like the people asked in the comments; what is it that isn't working?i'd also suggest you use mysqli instead of mysql.
+820	if you still want to use mysql, just change "mysqli" to "mysql" and edit the connect along with the query.i would help you with your code but as you didn't really point out what's wrong i'll simply give you this example.
+826	use isset when it's important to know if the variable has been defined and is not null:
+827	use !empty when it's important to know if the variable has be defined and is truthy
+828	use array_key_exists when it's important to know if the key exists and the value is of no importance:
+832	note: mysql_* functions are depricated, use mysqli or pdo as an alternative.
+834	you should be using binded parameters to prevent against sql injection and use mysqli_ or pdo functions.
+868	just loop the array containing the values, and check if they are found in the input string, using strpos
+947	you are vulnerable to mysql injection, because you do not escape your variables.
+952	array_key_exists checks for the existance of keys , not values.
+956	in order to interpolate an array element with a variable index into a string, you have to use the "complex" syntax where you wrap it with curly braces.
+969	or better yet, use prepared statements with mysqli or pdo .
+1015	first of all, you need to escape your values before insterting them in a query, especially if they come from the user ( $_post , etc.).
+1023	pro tip: avoid using select * in production software.
+1039	when you set a php variable, it will disappear as soon as the php script finishes.
+1041	to use the php $_session variables, just add session_start() at very top of all php scripts.
+1042	note that session_start() must be the first instruction -- if any other php headers are sent, session_start() will not work.
+1043	therefore, have your other php file also test the $_session['submitted'] variable (again, session_start() is required up top) to ensure it is okay to run the db insert.
+1059	to prevent against any sql injection you should use mysqli_real_escape_string or you can use prepared statements that accomplish the same thing.
+1098	and these days it's good practice to use pdo for database connections.
+1101	also don't store the password in the session.
+1103	mysql_connect does not return any object .... so it does not have any function or property that you can access using -&gt; operator .
+1104	i advice you to start learning mysqli or pdo since mysql functions are retarded and no longer maintained
+1109	that being said, keep in mind that cookies are not safe , i.e., although most users won't see them, they are in no way secure against reading and/or writing them by user.
+1110	if you need secure variables that are inaccessible by user, consider using sessions - session_start() and $_session .
+1117	of course, as was already mentioned in comments, you shouldn't be using the mysql_* family of methods within php anymore as they are deprecated .
+1150	in_array won't help you here because you have a string, not an array.
+1153	you can use strpos() to check for the existence of a substring inside a string, like this:
+1160	hear_about is an array and filter_var() does not handle arrays correctly.
+1165	the implode function ( doc ) "transform" an array to a string by concatenating the array values with the given glue .
+1197	you could use a debugger to examine these values before calling addfixtures() or examine them by adding simple echo or var_dump() statements right before the call.
+1199	an array needs to be printed out using a special function such as print_r.
+1202	when you're debugging, you should use var_dump() .
+1211	plus you can remove the htmlspecialchars() functions as they are only useful when looking at echoing html code to the browser - as you are uploading an image (not html code...) there is no need for any of the variables to be compared with this function in the first place.
+1216	you can exploit a lesser known feature of array_keys() , which is used to return the keys of an array as a new array (i.e.
+1225	but if you have a query that's basically the same and only uses different values in the where clause, you will get faster query executions by using prepared statements .
+1226	note that it's bad practise to interpolate variables into queries due the risk of sql injection attacks.
+1236	please do not use the mysql_* functions anymore and switch instead to the mysqli_ functions or pdo .
+1238	always escape your values before inserting them into a database query!
+1250	you can use $_server['query_string'] to get the query string.
+1261	put session_start() before anything else; this function initializes the session data that you will be accessing in $_session .
+1262	not exactly sure what you're trying to achieve with the rest of it all, but session_start() first is a starting point...
+1264	to check whether a property exists in an object you can use property_exists() :
+1270	some notes on the use of glob(); for opening files in case you may not be opening local files (it won't work on remote files): http://php.net/manual/en/function.glob.php
+1278	first of all, please use pdo or mysqli.. mysql extension is depreciated.
+1296	use prepared statements and parameterized queries.
+1301	for escaping special characters in sql statements.don't use mysql , this extension is deprecated, use mysqli or pdo .
+1360	about auto-commit: in auto-commit mode, each query is a complete transaction and it is executed instantly.
+1362	turning off the auto-commit will need you to commit the query manually.
+1397	alternatively, you can put error_reporting(0); at the top of your file and it will hide all of these warnings.
+1414	having said that, i would strongly suggest that you never allow the user to enter in parts of the actual sql you will run - unless it is a closed/secure environment, which means not an ope website.
+1433	sessions work very similar to this, except they store the file on the server, which is a more secure, but slightly more complicated process.
+1436	var_export will output the string representation of the value, instead of the type / value combo var_dump returns.
+1442	don't use the mysql_* functions, as they are depreciated.
+1443	i like pdo, so that's what i'm going to suggest to look into.
+1449	like other people already mentioned, please do not use mysql_* since it exposes you to sql-injection (use mysqli or pdo instead).
+1517	by default pdo silently ignores errors and returns empty results.
+1524	finally mysql_* functions are depreciated, and removed from the current version of php - time to move to pdo instead
+1525	if just want the key , then you can use array_keys to get an array of keys.
+1530	in the case of a &lt;input type="text"&gt; , the $_post['fieldname'] will always be set, regardless of if the value is empty or not.
+1532	do not use empty() , as this will return any falsy value as empty ( 0 , 000 , false , etc...).
+1559	when you are manipulating urls, you should use instead urlencode to send your content as parameter of the url.
+1560	as the documentation says, urldecode is not requiered because the superglobals $_get and $_request are already urldecoded.
+1568	you have to have session_start(); on the very top of your code, after &lt;?php .
+1573	usually lines are seperated by \r\n [windows] \n [linux] or \r [mac] so you could use it.if the lines arent formatted with those line breaks you could easily explode it using regular expressions -
+1575	maybe you can compare the session variable with null may be it will be more clear.and don't forget to put your session_start(); before anything else on your page.
+1584	you need to cleanse any and all input from the user.
+1589	in general, in development mode, you might wanna check your php.ini for error reporting, and check error_log on your web server to see if errors are reported there.
+1592	first of all, using get for sensitive data like email/password is a general no-no.
+1606	also if you are writing this as new code consider converting your mysql_ functions to mysqli_ or use pdo as mysl is now deprecated and no longer supported in php.
+1638	can use array_key_exists() to check key exist or not.
+1645	if you wish to use mysql object oriented, use mysqli or pdo driver.
+1678	bindparam takes a variable, to reference, and doesn't pull in a value at the time of calling bindparam .
+1693	unless you start the session, any data you write to the $_session superglobal will not be preserved for you when the script exits.
+1733	i won't suggest compiling from code on production server unless there is an absolute necessity.
+1763	even if it was of another type, i personally would consider it better not to escape the value that you're storing in the $_session , but rather escape it when you're doing something with it.
+1767	after all, you need different kinds of escaping depending on what you're doing with the value.
+1770	note that it is better to use pdo or similar for interacting with the database in any case, at least in the long run.
+1771	with prepared statements and bounded parameters, you do not even have to escape the parameters yourself.
+1773	when using in a database query, use prepared statements when outputting in an html page, use htmlspecialchars when using as part of an url, use ( raw ) urlencode when executing external commands, use escapeshellarg , or escapeshellcmd respectively.
+1774	mysql_real_escape_string should be used before putting the mail string into the sql query, but you probably want to save it in its original form, without escaping, into the session array.
+1785	don't use mysql* functions, they're out dated and dangerous, use mysqli* or pdo instead
+1820	to add another value of an array is to use array_push and to delete it you can use unset .
+1821	before accessing $_session you first need to initialise session using session_start(); on the top of the page
+1822	please note that sessions will not work if you use php from the command line
+1830	don't use mysql_*() for new code - it's depracated.
+1841	please, don't use mysql_* functions in new code .
+1843	learn about prepared statements instead, and use pdo or mysqli - this article will help you decide which.
+1848	to actually check if there are any results, it is better to use mysql_num_rows as it will return number of rows for specified query.
+1857	if possible you should move away from mysql_*** function in favor of mysqli or pdo.
+1896	it is a good idea to have an object encapsulating the access to global variables such as $_server , $_get , $_post or $_session as in your example.
+1901	print_r() in pre tags is faster and more lightweight but this is amazing for debugging as it shows data types and also shows empty() variables.
+1903	the problem here is that you binding parameters with bindparam , which uses binding by reference.
+1932	it is very important to use mysqli_* functions not mysql_* ones (they are deprecated) or even better pdo.
+1934	newer version of php has deprecated mysql functions.
+1952	isset() will return false if testing a variable that has been set to null.
+1953	also note that a null character ("\0") is not equivalent to the php null constant.
+1976	to also keep you safe from xss, always htmlspecialchars user input in html output.
+1989	also, note that mysql_ functions has been deprecated and used in the wrong way can be very dangerous, leaving your website vulnerable.
+1991	also, in your example, you're using mysql_ functions, which have been deprecated in later versions of php5 and removed in php7.
+1992	best to study up on mysqli_ or pdo (which you can also use with mysql databases).
+2004	edit : please make sure to use pdo or mysqli instead of the deprecated mysql module, as it may not be as secure as the newer soultions and will finally get removed from php.
+2005	both pdo and mysqli support new database mechanisms like prepared statements, while (at least mysqli) still providing similiar functions.
+2021	note php mysql_* functions have been depricated since version 5.5.
+2023	you should look into mysqli_* or pdo .
+2025	you just need to call session_start at the top of every file request you want to use sessions in, that's it.
+2044	dont forget to use session_start() in top of your code in login.php and other file if you want to use $_session
+2056	you can just use isset() to make sure the value is present.
+2062	i think the value for the $_post['color'] should be read only after checking if its set.
+2079	however, you should do some cleaning on $_post["submit"] since your code is open to sql injections.
+2095	strpos returns false when the find_string is not found at all.
+2103	because $_post is a global variable of php, it exists in every php thread, so isset($_post) will return true , in your example the value of $_post is an empty array.
+2134	you should mysql_real_escape_string each value in $_post['interest'] to avoid sql injections.
+2150	unless you specify when the cookie is to expire it will automatically expire when the browser window is closed.
+2151	the third parameter of setcookie() allows you to specify the expiration of the cookie:
+2155	passing arguments via the url sets them to $_get not $_post to set data to $_post you have to post data via an html form, curl etc
+2160	please, please, please i beg of you stop now and learn about prepared statements in mysql/php, the pdo system is a good one to use and should be pre-built into your php setup.
+2168	however it is bad practice to use global variables in functions, just make sure you never overwrite the $dbcon variable, it might happen when using code from somebody else.
+2180	so i'm going to go ahead and suggest you make a major change to your code: don't use mysql_* functions as they are deprecated.
+2200	if the query contains parameters, then prefer using pdo::prepare() and pdostatement::execute() instead of pdo::query() .
+2237	when you try to echo an array an implicit transformation from array data type to string data type is performed.
+2238	because only strings can be echo ed.
+2239	if you want to see array contents - use print_r or var_dump , for example.
+2252	the function prepare() returns an object of pdostatement class.
+2253	as it says on the php manual, pdostatement :: execute() does not return results, it returns a boolean instead to indicate if the query was successful or not.
+2285	i will also add that you need to check the sql-injection and escape your fields or, better, use pdo and prepared statements.
+2295	the mysql_* functions will work, or better is mysqli, or even pdo etc.
+2304	don't use mysql_* functions, they're deprecated.
+2310	you should also consider switching to mysqli or pdo extensions since mysql_query() is deprecated and will be removed in future updates of php versions.
+2317	sidenote: you theoretically could with older versions of php, but as of php 7.0, the mysql_ api has been removed, so you definitely wouldn't be able to use it here if that were the case.
+2318	what you need to use here is a pdo prepared statement in order to escape the data, which is what you are looking to do here.
+2319	add error reporting to the top of your file(s) which will help find errors.
+2320	the reason why you must use array_merge and not array_unshift is because the latter only works on numerically indexed arrays.
+2323	note: when using array_merge the items with the same keys from the second array will overwrite the ones from the first one, so if 'front' already exists in $queue it will not be overwritten, but only brought to the front.
+2332	i would first say that you use pdo, and make your queries safer by using prepared queries.
+2338	after header(...); you need to throw in a return; or exit; to exit right there, otherwise it continues beyond that header.
+2339	you are open to sql injection in checkavailableusername , you need to sanitize the value before you get to that function and also escape/ bind the value to your query instead.
+2370	if you need to check on each page whether there's still an active facebook session or not, look at fb.getloginstatus() in the javascript sdk, or make an api call to (for example) /me/permissions to check your access token is still valid
+2378	the leading concept in programming is "don't trust user input" .
+2381	to escape a user input to prevent bad characters you can use htmlspecialchars or you can filter your get input with filter_input something like that:
+2387	in_array — checks if a value exists in an array
+2405	edit: you can add the filter_var command to strip bad characters and sanitize the input.
+2411	for security reasons i also suggest you use pdo instead of mysql functions and $_post instead of $_request (in case you are not already sending your form per post).
+2412	you are looking for array_search which will return the key associated with a given value, if it exists.
+2473	note: stop using deprecated mysql_* versions.
+2478	by default, forms submit data via get parameters in the url, which in php, and in this case, would go to for example $_get['post1'] .
+2488	by using a keyed array, there is no duplication and you can easily check how frequently a hashtag is used by just accessing $trending[$hashtag] .
+2492	and also do not use mysql_ functions.
+2503	use array_merge() , because array_push() will push the output of explode() , which is an array, as a whole to the array in the first argument, creating a jagged array.
+2505	while outputting to html, you also might want to put a $value = htmlentities(trim($value)); in the foreach loop.
+2509	if you want to include the form name, use a hidden field like this inside the form:
+2511	firstly use pdo or some php framework that has nice api to work with mysql.
+2519	also, incorporating potentially unsafe values (such as values of variables from a $_get or $_post) leads to sql injection vulnerabilities.
+2522	a better pattern is to use prepared statements with bind placeholders .
+2525	you could muck with escaping the values, but a much better pattern is prepared statements with bind placeholders...
+2534	another good habit is to check for errors after every call to pdo::prepare() or pdostatement::execute().
+2541	any approach that uses $_post values directly in sql is vulnerable to sql injection, though.
+2547	key() method would give the key of the current element of the array, so the argument for this method should be an array.
+2548	if you are looking for all the keys of an array you can use array_keys .refer this for more details: http://php.net/manual/en/function.array-keys.php
+2552	the php function array_key_exists will tell you whether $row contains the key you want.
+2611	mainly the implode() function returns a string from the elements of an array.
+2618	sidenote: learn about prepared statement because right now your queries are susceptible to sql injection attack.
+2623	further, the php manual strongly recommends using the mysqli extension, over the mysql extension.
+2636	would advice you to use mysqli since they have protection against sql injection attacks etc.
+2650	to get variables from the query string, you need to use $_get .
+2651	$_post represents data that is sent to the script via the http post method.
+2652	to get the value of a variable, you need to use $_get
+2659	you are open to sql injection and you should use prepared statements .
+2661	don't use mysql_ functions, they are not as secure and deprecated.
+2662	when doing selects for password and username, ensure case sensitivity by using binary and put limit 1 at the end, to ensure only 1 record in return.
+2665	you should use mysql and not mysqli since its deprecated you're accessing $row 's associative array keys, so you need the function to return associative array whild mysqli_fetch_array() returns numeric keys.
+2685	you use fetchall in you pdo statement, which will return an array.
+2752	to utilize session variables you will need &lt;?php session_start(); ?&gt; at the beginning of your pages (before any html is used)
+2761	short answer: check to see if register_globals is enabled on your live server using var_dump(ini_get('register_globals')) or phpinfo() .
+2762	if register_globals is enabled, the preferable solution is to disable register globals—it leads to security problems and as of php 5.3 is deprecated.
+2777	by building sql statements with outside variables, you are leaving yourself wide open to sql injection attacks.
+2779	as a side note, it looks like you're using the deprecated mysql extension (and putting post values straight into a database query opening up the possibility of sql injection), i strongly recommend mysqli.
+2782	never let the sql execute a command which contains unescaped and unchecked user input.
+2793	use mysqli_* or pdo , because mysql_* is deprecated and closed in php 7 .
+2794	your code is open for sql injection, you must need to protect with sql injection or just simply use prepared statement .
+2796	however, you really should move from mysql_* to pdo or mysqli.
+2797	i suggest to work with pdo , instead of mysql_... functions.not only because it's newer and object oriented but also because mysql... is deprecated.
+2803	even if you have used pdo , your code is still vulnerable with sql injection because you have not parameterized the query, query must be parameterized in order for the values to be cleaned.
+2819	at a minimum, wrap the $_get['name'] in a sanitizing function, like mysql_real_escape_string() to prevent sql injection attacks.
+2820	and then when you're outputting user-supplied data, make sure to wrap it in htmlspecialchars() to prevent cross-site scripting (xss) attacks.
+2825	i've always stood by the idea that data should go into the database as raw as possible.
+2837	edit: on another note, it may not be a good idea to delete items from the array while you're looping over it.
+2882	$_post , being a superglobal, is always set.
+2885	when you try to store the form submitted values such as post or get, it is really a good habit to check if the value is really sent.
+2896	i would encode the image before you insert into the database with base64_encode() .
+2898	$_post is an array, you access arrays with [], so:
+2908	if you are using htmlspecialchars, it is going to turn anything that is not alphanumeric into an html entity, so it will actually render the symbol in the browser rather than using it as markup.
+2943	isset is only necessary if you're trying to work with variables that may not exist.
+2947	isset only checks if a variable in instantiated.
+2950	you might also want to have a look either at pdo and prepared statements that replace mysql_ functions.
+2954	also, as a suggestion, you only need to prepare() a query once.
+2958	however, as with any other time in programming, if you find yourself writting the same code over and over, you probably need to write an abstraction.
+2972	unlike a cookie, the information is not stored on the users computer,it's stored on the server.
+2982	i highly recommend looking into using a pdo connection because it will be much more portable and parameterized queries pretty much eliminate security issues if used properly.
+2983	all mysql_* functions are going to be deprecated as well so you should invest your time in learning the newest standards.
+2992	you should start looking into switching over to either the mysqli_ or pdo api and with a prepared statement.
+2994	this error means you have outputted something before calling the session_start function.make sure there is nothing above your &lt;?php tag and no outputs before session_start.
+3001	if you submit a form that has multiple select boxes, only the name of the checked ones will be in the $_post array.
+3020	mysql is deprecated and can be vulnerable about sql injections .
+3027	if you need to encode all the symbols that are defined in html as "character entities" you can use the php function htmlentities() instead.
+3037	you should probably take a look at using a library like pdo for your database queries as you're really exposed to injection attacks.
+3038	this is because checkboxes are only sent if they are checked.
+3050	the $_session variable is always set - regardless if you have initialized the session or not.
+3053	mysql_real_escape_string() should make sql injection attacks less likely however, it is strongly advised that you use the mysql database apis that are not deprecated such as mysqli (mysql improved) and pdo , which have stronger security in place.
+3076	in order to make dealing with the session possible add session_start(); to the top of your script.
+3077	the simple answer is that you need to put session_start() at the top of the script (and the top of any script that uses the session variables).
+3082	you should also look into binding parameters in queries, which would allow you to avoid having to think about escaping values before running queries.
+3089	fyi : please, don't use mysql_* functions in new code .
+3091	learn about prepared statements instead, and use pdo or mysqli - this article will help you decide which.
+3096	in order to convert a comma-separated string into an array of individual values you can break up the string with a function like explode() , which takes a delimiter and a string as its arguments, and returns an array of the delimiter-separated values.
+3097	isset is used to check whether input you receive contains what you expect - this is a very, very loose definition and i wrote that trying to explain easily when you'd use it.
+3102	when you receive an input that user made via html form, you want to check whether certain values have been populated - in that case, you use isset .
+3122	you should stop using mysql_* functions .
+3123	these extensions have been removed in php 7. learn about prepared statements for pdo and mysqli and consider using pdo, it's really pretty easy .
+3142	or even better drop the mysql_ lib (it was depreciated 10 years ago!)
+3143	first of all do not use mysql_* as ther are deprecated.
+3145	however, if you're using this with a get array, then yes; it would be best to use an isset() and empty() on a conditional statement.
+3157	you can use strpos to search for an occurrence of a string within a string.and use an array for the search argument for str_replace.
+3159	then you should use array_unique with the flag sort_regular to remove all duplicates and lastly json_encode it again to a json string.
+3174	if you are using php and mysqli, then mysqli::real_escape_string() will help.
+3192	if you would like to get form data you need to use the $_get , $_post , or $_request object(s), in your case you are using the post method in your form so instead of $domain use $_post["domain"] :
+3200	always use an isset construct to check whether the variable exists.
+3201	first of all, do not use the old mysql_... functions.
+3202	i recommend you pdo, but if you want it the "oldish mysql-style" at least use mysqli.
+3233	if the array is small enough, iteration will be more efficient.
+3234	but as the size of the array grows, it will becomes increasingly slower (and hence the function call will become faster).
+3271	firstly, when your handling the user's input and placing directly into a url, please make sure you url encode it.
+3273	if you are using a form to handle the user input without javascript intervention, don't worry about url encoding, that should happen automatically.
+3292	now you can also echo out the entire $_post if you want to see other values it holds, but then echo does not work on arrays, so you will need to use print_r($_post);
+3302	you can also use str_replace which should be faster then preg_replace , according to this entry.
+3313	switch to mysqli or pdo and use prepared statements.
+3318	the alternative to mysql_escape_string in pdo is using prepared statements.
+3319	you are secured you against sql injection when you pass parameters through placeholders in a prepared statement.
+3324	it's a pretty common misconception that you have to manually serialize objects before putting them in session.
+3325	you can simply assign an object instance to a slot in $_session , and php will automagically serialize and unserialize it for you, between requests.
+3344	finally, be careful when rendering data "raw" to html - if this data (which you do not control yourself) contains an angle bracket, it will break your website.
+3355	just beware : you have to think about escaping data before injecting it back into the form (see htmlspecialchars and/or htmlentities ) ; that is true for everything you get from the user (and, probably, for php_self too, i'd say) ;-)
+3364	also, as @damienlegros noted in his answer, you should always have the session_start() statement as early as possible in your code, i.e.
+3393	and also, as a side note: i highly recommend switching to mysqli from mysql, which is deprecated.
+3396	for performance reasons you should probably select only the needed columns in the query.
+3397	and it is heavily recommended to use pdo or mysqli instead of the mysql_ -functions as they are deprecated as of php 5.5 .
+3399	you also probably want to look in to using pdo to prevent exploits better.
+3405	if you want to use the foreach structure, you need to ensure that the values passed to it are an array.
+3449	it is also overkill putting it inside php, so just leave it as html, but if you want to leave it inside php, than remember as said to take it out of the any condition/statement since we need to control its appearance from client side.
+3463	to pull your images and pictures from your database, a select query is what you are looking for.
+3467	you should also consider using mysqli since mysql_* is now deprecated.
+3469	it is safe to return user data based on a $_session variable if you are certain of its validity because you set it yourself in code.
+3470	it is not safe to return data based on a session variable that you get from $_post .
+3474	variables are not parsed by interpreter inside single quotes.
+3477	besides if you're using method="post" in your form, you can only get the inputs value through the $_post array.
+3504	when a form gets submitted via a post or a get request, what gets submitted are key-value pairs of data, i.e.
+3563	the biggest drawback to persistent connections is that it limits the number of users you can have browsing your site: if mysql is configured to only allow 10 concurrent connections at once then when an 11th person tries to browse your site it won't work for them.
+3597	if your search string was more complicated, you could use a regular expression instead.
+3601	always use mysql_real_escape_string instead of addslashes.
+3634	and finally: as people said in the comments, stray away from mysql_* functions, and look to sanitize the data going in and out of your database.
+3658	ensure that the variable is an array before looping with is_array :
+3679	here is an example for using pdo to connect to a db, to tell it to throw exceptions instead of php errors (will help with your debugging), and using parameterised statements instead of substituting dynamic values into the query yourself (highly recommended):
+3690	i strongly recommend to use mysqli with a prepared statement in order to avoid the risk of sql injection.
+3693	and try to avoid using mysql_* functions due to they are deprecated.instead use mysqli_* functions or pdo statements.
+3722	if you are using a database at all to store this data before it is sent back to the browser, take extra care to make sure the database is properly encoding and retrieving utf-8 text.
+3723	if you were to use mb_strtolower , you could pass an encoding like: mb_strtolower($summoner, 'utf-8'); this properly handles special characters.
+3724	print_r should be used only to print out an array in a human readable format (for debugging).
+3736	keep in mind that filter_validate_* only tells you if something is valid, while filter_sanitize_* actually cleans your data from unwanted and potentially malicious data.
+3741	you should have a look to foreach() learning to loop through arrays.
+3742	also have a look to empty() and isset() in the php documentation, those are your first friends for validating.
+3747	using pdo, you should look into prepared statements and binding parameters.
+3766	also, you should be passing the login name using a paramaterized statement to avoid an obvious security hole .
+3778	since mysql and its other components are depreciated due to security issues and performance, here is the usage of the mysqli class :
+3786	also, header() doesn't work if you've already produced output.
+3802	secondly, by putting $_post values directly in the query like that you are opening yourself up to all sorts of injection attacks.
+3821	__file__ is part of the magic constants and will return the absolute path of the current included file.
+3822	$_server['script_name'] is a part of the predefined server variables , and will return the path of the script originally called in the server relative to the server root path.
+3823	you might want to use __file__ when logging messages or when looking to extract the current project name, branch name, etc.. and you might want to use $_server['script_name'] when you are looking to refresh the page, identify the origin of the call, and so on.
+3824	in your example you are using basename(__file__) which will in that case return the name of the included file.
+3848	an array when cast to a string will simply be output as the string "array" .
+3849	if you want to output each element in the array , loop through them or use something like join :
+3852	like other user have said, don't forget to add session_start() somewhere in the beginning of your code.
+3853	you should definitely consider to use another mysql extension as well, mysql_* is deprecated, use mysqli_* or pdo .
+3854	it's also worth noting that the mysql_* set of function is now deprecated.
+3855	it'd be better to use mysqli or pdo .
+3868	well the problem is $_session value can be set and used on server side only.if you want this content on client side javascript you will have to send a request to php server for datacache value and then set it in your local storage .you may use ajax call like
+3877	or, better yet use placeholders (which are available in both pdo and mysqli ) see best way to stop sql injection in php .
+3913	using pdo with prepared statements will take care of escaping your inputs :
+3916	php internally uses the equivalent of serialize / unserialize when you put objects inside $_session , so as long as you obey the rules (don't try to serialize resources, provide class definitions for unserializing) it all works automatically as you have already seen.
+3967	to check the encoding, you can use the file command in a shell.
+3981	try to usr mysql_fetch_array($sql,mysql_assoc) or mysql_fetch_assoc($sql) instead of mysql_fetch_array($sql) by default mysql_fetch_array return non associative array.
+3983	it's better for performance to use select column1, colum2 from table_name mysql module is deprecated.
+3984	it's better to use pdo mysql module page mysql api comparison
+3994	if you are just looking to get results out of a select query, you can use output parameter binding, the basis of which is bind_result .
+4016	first off, you should avoid using superglobals like $_post within your class.
+4017	a better way is to inject the $_post from the top level and just treat it as an array.
+4021	basically, every page will start with session_start() to initiate the php session.
+4028	if you want to get all matches string, use preg_match_all() that find all matches.
+4032	first of all switch from mysql_ to mysqli_ or pdo they are more reliable.then, check the spelling (host, user and password) and the case !
+4038	hint: stop using deprecated mysql_* api.
+4039	use mysqli_* or pdo with prepared statements.
+4040	mysql_* will be removed in the next version of php and prepared statements prevent you against sql injection.
+4041	also, the mysql_* extension is deprecated as of php 5.5 and is due for removal in future releases.
+4042	it's recommended to use mysqli or pdo instead.
+4046	seems like you forgot session_start(); on top of the code.
+4048	this ( mysql_* ) extension is deprecated as of php 5.5.0 , and will be removed in the future.
+4049	instead, the mysqli or pdo_mysql extension should be used.
+4050	switching to prepared statements is even more better to ward off sql injection attacks !
+4060	when you include a script with include or require , that script has access to all variables in scope at the inclusion site.
+4072	you can't use mysql functions with a mysqli connection, and vice versa.
+4073	always start session page with session_start().
+4076	but you have to initialize session_start(); in all web pages where you have need to access that session variables.
+4085	sidenote: it seems you're saving plain naked passwords, if its available to you (php 5.5 or greater), i'd suggest you should use password_hash + password_verify to handle your login module for hashing those passwords.
+4087	you can't compare a scalar variable to an array.
+4106	both htmlspecialchars and htmlentities are subceptible to the infamous utf-7 problem.
+4110	htmlspecialchars will default to utf-8 (in php 5.4/5.5) if you don't specify the third parameter so you should be safe even if you forgot to establish it.
+4129	to prevent first order sql injection you can use pdo with mysql prepared statement.and when you want to display it to the html page use
+4135	note: if you use sessions, session_start() must be the first row because sessions can't be started after any headers sent.
+4141	note :- mysql_* has been deprecated use mysqli_* or pdo
+4182	also remember, session_start should always be the first line of the page in which you need to use sessions.
+4183	isset checks the variable to see if it has been set, in other words, it checks to see if the variable is any value except null or not assigned a value.
+4184	isset returns true if the variable exists and has a value other than null.
+4186	empty checks to see if a variable is empty.
+4187	empty is interpreted as: " " (an empty string), 0 (0 as an integer), 0.0 (0 as a float), "0" (0 as a string), null, false, array() (an empty array), and "$var;" (a variable declared, but without a value in a class.
+4189	to check is key exists in array better use array_key_exists because if you have null values isset returns false
+4219	use the mysqli or the pdo extension instead of the old mysql extension.
+4227	the best thing is to never use client-provided data for opening files, but if you have to then make sure the path is clean and does not contain malicious stuff (such as a preceding slash or dot, etc).
+4229	also its now encouraged to use mysqli not mysql.
+4231	also, if you're on php5 you should use a pdo object instead, for connecting to the database, and you shouldn't put vars directly into mysql queries (that allows sql parser to be injected with sql code from the user).
+4234	additionally, do prevent from sql injection, you should also sanitize your inputs ( $_post data) before saving them.
+4237	also, you may want to check $_server['http_accept_language'] instead of $_server['http_user_agent'] for the language of the user.
+4243	also, i hope you sanitize your _post inputs properly so little robert won't be able to harm your database.
+4250	now of course you should upgrade your code to mysqli or mysqlpdo since the php mysql package is not supported anymore.
+4255	you can also do a print_r($_session); to have a dump of this variable and see the content....
+4270	you should also at least use htmlentities on the value that an input won't break your html:
+4271	note that i have used htmlspecialchars to avoid your variable breaking the html.
+4279	remember that session_start has to be the first thing ever in your code, as it sets some headers.
+4281	note: you may need to call bind_param() after setting the input variables rather than before.
+4300	so, to make this work you have to use either __dir__ or dirname(__file__) to find out where your script is located in the file system.
+4305	add error reporting to the top of your file(s) which will help find errors.
+4309	use mysqli with prepared statements , or pdo with prepared statements , they're much safer .
+4310	note that you shouldn't be using mysql_* functions since it is a deprecated library.
+4311	think about making the move to mysqli_* or pdo.
+4313	you can't use values() and a selection together in an insert statement.
+4322	it would be better if you used pdo or mysqli, so you could use parametrized queries instead of string substitution.
+4361	then, you have to switch to new mysql syntax for php, like mysqli or pdo.
+4362	the mysql syntax you are using is deprecated.
+4363	that said, you should really consider both switching two either pdo or mysqli for your queries rather than the mysql extension and also looking into prepared statements and properly sanitizing strings, because you're very vulnerable to sql injections.
+4383	so after session_destroy() the cookie that holds the session id is still alive, and just the session file will be deleted.
+4388	security concern: you are not escaping user submitted data when passing it to the sql statement opening you up to sql injection.
+4395	mysql_real_escape_string will escape invalid characters, so they can be used quite safely in a query.
+4400	and as a rule, you should never store passwords as plain text in a database.
+4405	and i recommend you to use better approach to sql handling like using pdo extension.
+4436	you are doing an extra foreach , just check if the key exists in the array, you can do that using in_array .
+4446	i'd also recommend you use mysqli since mysql functions were deprecated in php 5.5.0, and it removed in php 7.0.0.
+4470	ss looks to be a number too, so checking if it is numeric using is_numeric will help stop sql errors, if for some reason it is not.
+4476	you don't need to use session_start(); twice as that may trigger that the session was already started.
+4478	add error reporting to the top of your file(s) which will help find errors.
+4486	for mysql, replace it with pdo or mysqli.
+4495	filter_input() requires you to clearly specify the input type.
+4496	$_request is not clear about it, it contains input from various sources, allowing one source overwriting another.
+4505	php sessions are implemented with cookies.
+4506	whenever you call session_start() , the response includes a set-cookie header which sets a browser cookie containing the php session id.
+4541	first of all: never use unescaped $_get , $_post , $_request , $_session .
+4552	try adding session_start(); in the first line of your first code.
+4558	you have to call session_start() each time working with a session (not only when creating it)
+4563	if you would like to learn how to use a real object oriented database layer, use doctrine.
+4585	also don't use mysql extension instead use pdo or mysqli.there are numerous things that are wrong with this script.
+4598	you really should be using something like filter_var() or parse_url() instead of regexes for url validation.
+4610	you cannot check variable is empty by isset(); .
+4612	add error reporting to the top of your file(s) which will help find errors.
+4629	to be able to see database errors, one have to set pdo errmode to exceptions.
+4630	exceptions are better than regular errors in many ways: they always contains a stack trace, they can be caught using try..catch or handled using dedicated error handler.
+4642	__construct and __destruct are called every time a script is ran with an instance of that object.
+4643	if you put an object in a session, that object does not hold the same value across page views, it is simply an object.
+4660	also please stop using the old mysql_* functions.
+4661	mysql_* functions will be deprecated in the future.
+4664	alternatively (and for your own good), you could use parameterized queries with pdo or mysqli .
+4671	post variables are passed via the super global array $_post in php.
+4680	the problem is that you're using array_pop on an index of the potentials array.array_pop is designed to pop the last element off the end of an array.
+4681	array_pop() accepts an array as argument and it remove the last value from the array (returning it).
+4709	edit: php 5.4 will support array dereferencing, so you will be able to do:
+4734	you can check email field is not empty and then you can use filter_var to validate provided email.
+4752	you can set the value in $_cookie array by manual if you really want it in same page which's declared.
+4757	pdo, because it doesn't only support mysql.
+4758	whereas mysqli, obviously, only supports mysql.
+4759	if you use pdo you will much more easily make the transition from mysql to, for instance, postgresql.
+4779	note - you are using the old obsolete mysql_* functions rather than the current mysqli_* functions (or the pdo equivalents).
+4788	by the way please, don't use mysql_* functions in new code .
+4790	learn about prepared statements instead, and use pdo or mysqli - this article will help you decide which.
+4798	this can be done with a single line of code using the array_diff function which returns all items in the first array that are not present in the second array.
+4806	array_search() returns you the key already, or false if value is not found.
+4821	and try to avoid using mysql_* functions due to they are deprecated .instead use mysqli_* functions or pdo statements
+4822	call session_start() at the top of each of your pages.
+4824	you're using exit in your switch , which (unless you want your script to end at the switch) is a no-no.
+4841	possible it is missing the call for session_start , session_register make this automatically, so what you have to do is just make sure that you have called session_start before use $_session global.
+4842	add a session_start() at the begining of your code and $_session to manipulate it or create it.
+4866	one of the main advantages of pdo is the support of parametrized queries, where you only write placeholders and let pdo insert the values.
+4867	this will help protecting against sql-injection, because pdo will do the correct formatting for you.
+4877	the mysql extension is deprecated and will be removed in the future: use mysqli or pdo instead
+4879	as a little side note, if this is being printed in a html document, i presume you are passing the output though something like htmlentities... just in-case the input $path contains something like a [script] tag (xss).
+4914	you can also use var_dump passing an array, it'll print the array's structure.
+4928	also in your form you need to have value so there is data to get:
+4930	you need to make sure you are doing mysqli for all your functions and not mysql interlaced with mysqli .
+4932	consider using mysqli_ functions or pdo and protect your code against sql injection.
+4953	please check xss, sql injection attacks around the internet implement logic according to best practises, and validate/sanitize your data before process parameters into db or etc.
+4972	remember to use stripslashes() to remove the quote escape on the values use addslashes() on.
+4977	the problem is that when you 'enter the values via the url', they'll end up in $_get instead of $_post .
+4979	the action of the form is the address of the current script because you set it to $_server['php_self'] .
+4989	you shouldn't use htmlentities when saving it.
+4990	you should use htmlentities when displaying it.
+4991	the rule of thumb is not to encode/sanitize the data until you need to.
+4994	when saving it, you need to sanitize for sql injection, so you mysql_real_escape_string it.
+4995	when displaying, you need to sanitize for xss, so you htmlentities it.
+4998	in addition to paolo's answer about when to use htmlentities() , unless you're using an old version of php, the correct way to sanitize for insertion into a mysql db is to use prepared statements which are part of the mysqli extension .
+5013	you may need to add session_start() to the top of the file.
+5027	it should be noted however @objective_d - you ought to use either mysqli or pdo as they offer far greater protection from the dreaded sql injection by utilising prepared statements.
+5053	first of all, use pdo or mysqli functions for database queries.
+5084	as a side note, mysql_query is deprecated, you should look into mysqli and prepared statements.
+5098	also, as a side note, try to switch from mysql_function's to pdo or an abstraction layer.
+5116	you'll also want to add session_start(); to the top of the script.
+5121	and mysql_* functions are depreciated they no longer supported by later versions of php.
+5122	this mysql_real_escape_string() or mysqlo_real_escape_string() is not safe enough to prevent you against sql injections.
+5123	solution is simple better start using mysqli prepared statements or pdo prepared statements.
+5143	use mysql_fetch_assoc to get an associative array which will include the column names as keys.
+5158	and since you're using pdo, why not use prepared statements:
+5165	you need to call session_start() whenever you are using session.
+5169	add error reporting to the top of your file(s) which will help find errors.
+5174	anyway, the mysql functions, you use, are deprecated.
+5179	don't insert $_post data to the database directly.
+5184	note that isset() will return false if the key exists in the array, but its value is null.
+5186	nb: it is better to use mysqli or pdo instead of mysql since mysql is officially deprecated since php 5.5
+5189	@[niet the dark absol] is correct that you cannot interchange mysql_ and mysqli_ .
+5257	use the mysqli or pdo libraries instead.
+5305	note that pdo won't allow to escape table or field names.
+5316	my initial suggestion would be whether you have session_start(); included on all the pages where $_session is utilised.
+5318	sessions are not shared between servers.
+5322	it is normally good practice to do all your database connectivity at the top of the page, then display the results.
+5345	it must be $_request and not $_requests .also beware of sql injection since you are directly using the values.use prepare statemnts to prevent sql injnection.
+5359	you could get the complete get variable with $_get then you have an array that you can browse with
+5362	isset() will return true if the variable is set but empty (eg. ''
+5371	if you want it to print as actual html, then you shouldn't use htmlspecialchars() .
+5374	htmlspecialchars() will convert any special characters in the string to its associated ascii character code.
+5375	of course you could add the trim() like echo trim($error) so there would be no whitespaces on beginning and end.
+5376	mysql is depreciated, you should use mysqli or pdo.
+5380	second, you should not be using mysql unless you are using an outdated version of php.
+5389	as others have already stated, you should be using the mysqli function set as opposed to the mysql function set.
+5397	you should also rather use mysqli functions and not deprecated mysql functions and the better option will be prepared statements.
+5401	browsers automatically collapse all line breaks, tabs, and spaces in between the characters into a single space , which produces the "not as readable" output.
+5405	moreover, you shouldn't use mysql_* functions because are deprecated.
+5407	if you know both of the values are guaranteed to be strings, then == and === are identical since the only difference between the two is that === checks to see if the types are the same, not just the effective values.
+5411	so the first thing i'd recommend is to stop using the mysql_xxx() functions, and switch to using the pdo library instead.
+5412	the old mysql functions are deprecated anyway, so it's not recommended to use them if at all possible, but in this case there's a specific reason for using pdo instead because it has significant performance benefits over the old functions.
+5413	pdo allows you to use a feature called prepared queries allows the database to cache queries more efficiently if you to call similar queries repeatedly.
+5423	also note that the mysql extension is deprecated (and probably unmaintained).
+5439	use mysqli_real_escape_string when inputting strings into a database.
+5477	as someone said in updated version of php mysql_* function are deprecated you can use mysqli_* functions, your code is not working because you have closed your mysqli connection in mysql.php
+5478	one thing that you need to seriously reconsider is using unsanitized data from $_post and $_session .
+5479	this is potentially a major security risk to your site as someone can fairly easily perform some sql injection .
+5480	i would also look at migrating your code to use mysqli or pdo, as mysql is quite outdated.
+5486	even if you do all the above, as i have mentioned, your database, still be weak to mysql injections, therefore, you are better of learning pdo or mysqli
+5495	also try removing the mysql_* functions and using mysqli_* functions or a pdo because the mysql_* functions are depreciated.
+5496	isset will return a boolen, not a string that you are expecting.
+5497	use mysqli instead of mysql to prevent hackingand also validate the user input use htmlentities() or htmlspecialchars()
+5501	get is a super global variable and to access it you have to use $_get .
+5503	if it can be output to a user, you must prevent the potentially malicious user from including html tags in his code.
+5507	let's say you're saving my post with that query (yes, you shouldn't use mysql_* functions as they are deprecated, but that's just to explain the idea) :
+5515	but remember: cookies are saved local on the client pc.
+5528	local variables that are defined and used in a function are not automatically unset after the function is executed.
+5530	unless you are consuming large amounts of memory with the definition of a local variable there really isn't a need to explicitly unset them.
+5546	that causes an error because you have an output before the header is send and the image is not shown.
+5559	and secondly, try to use mysqli database extension instead of using mysql.
+5560	mysql extension is deprecated from php 5.5 onward.
+5566	this part of the code will only execute only if this is set $_session['user'] , you need to start the session on the pages that you use sessions with session_start(); before your code.
+5567	preg_match matches the first match and then stops.
+5570	if you want to match all occurrences of the expression, use preg_match_all .
+5578	first thing first to make sure that empty values are not inserted, you need to check if that value is set from the form then execute the query when the value is set, also you need to prepare your statements when using pdo, also don't directly enter you variables in your query use placeholders instead.
+5580	this is injection safe method with pdo, and i recommend you to use it:
+5583	sidenote: don't use mysql_* functions, they are deprecated as of php 5.5 and are removed altogether in php 7.0. use mysqli or pdo instead.
+5610	in your sql query string you are not providing the adminid variable, instead you are fetching a user who has the adminid equal to the string value "$adminid", the right way to put variables in a sql query using pdo is by using prepare with tokens referring to the variables, then giving an array that associates each token to a php variable, like this :
+5630	you really should sanititze your user-input before using it in a query, otherwise your site is vulnarable to sql-injection.
+5654	if you are not going to change to mysqli or pdo with prepared statements ( which mitigate against sql injection ) then at least ensure you filter any data received from your users - for instance mysql_real_escape_string offers at least some protection.
+5669	you need to sanitize all user input before using it.
+5673	also, in sql queries, you need to escape the data or use prepared statements.
+5674	you should not be using mysql functions, switch to mysqli or pdo.
+5678	you would use mysql_real_escape_string() on them, but you should be using mysqli or pdo anyways...
+5691	also, adopt what helion3 said and check that _post actually has keys/values before you assign it to the _session
+5702	if you are inserting into a database, then you should usually be handling your escaping using parameterized queries (via prepared statements) .
+5707	you need to start the session before any usage of it occurrs.
+5708	so call session_start(); at the beginning of the script.
+5709	that query is also unsafe because the value from the session inst escaped.
+5719	isset() just checks whether the variable is null or not and won't throw an e_notice error if you accessed an undefined index in an array (unlike is_null() ).
+5723	empty() will return false if there is no assignment to that variable.
+5778	autoloading is by far the preferred way to deal with includes.
+5796	sanitization for mysql should be considered entirely separate from sanitization for web output, and you should handle them separately to avoid a lot of hassle.
+5797	htmlspecialchars($val) at output time will prevent any malicious tags from being rendered, because &lt; and &gt; characters are converted into their entity representations and not rendered as tag delimiters.
+5798	use the ent_quotes modifier if you are outputting something that is inside an html element's quoted attribute, such as &lt;input name="email" value="&lt;?php echo htmlspecialchars($email,ent_quotes); ?&gt;" /&gt;
+5800	strip_tags() shouldn't really be used for sanitization, as it can be fooled with badly formed html.
+5804	also, when you make an sql query, you should sanitize variables you pass to it.
+5806	also, just for future, it is recommended to use pdo because mysql extension is deprecated and will be removed.
+5814	i suggest you should use stripos , not strpos for your purposes, as it is case-insensitive and will also find words with uppercase letters, if it's something you might need.
+5822	i use the php function isset() to check if a post was sent or not
+5844	if you want to know whether the array is defined at all, use isset($array) .
+5845	if you want to know whether a particular key is defined, use isset($array[$key]) .
+5850	the only thing i can think of is efficiency: if you're going to be checking a large number of keys for existence in an array, you can save some work by first detecting when the array itself isn't set, and just skipping all the individual key checks in that case.
+5870	i advice you to use pdo or mysqli look this is deprecated .
+5875	also, you should use mysqli or pdo instead of mysql.
+5876	and for sure you have to call session_start() at top
+5930	when using double quoted strings, you don't need to concatenate variables.
+5934	rather than inserting values directly into the string, use a prepared statement.
+5941	yes, even if cookie is disable.you can call your session whatever scope you are in your program, if you want to unset the session, then you need to use
+5942	to destroy all data registered to a session, then use session_destroy in this case the session variable still exists but empty.
+5948	note, (1) you are open to sql injection by using $_get values directly in your query, and (2) from the mysql_ doc - this extension is deprecated as of php 5.5.0, and will be removed in the future.
+5949	instead, the mysqli or pdo_mysql extension should be used.
+5968	also you can put next array into that array :) it's called multidimensional array .
+6016	by the way, consider using pdo or mysqli for manipulating database.
+6070	that being said: don't use the mysql_* functions anymore.
+6076	use mysqli with prepared statements , or pdo with prepared statements , they're safer .
+6077	as escaping depends on the system you are sending the data too, my suggestion would be to use the functions provided by php, specifically created for each system.
+6078	or use prepared statements ( mysqli , pdo ) don't add backslashes yourself : why do that when proper and well-working (and well-tested !)
+6079	for html output, use htmlspecialchars or htmlentities .
+6085	you're also probably opening yourself right up to some sql injection vulnerabilities - check out pdo and prepared statements.
+6086	and if this is for an actual web application, start salting and hashing your passwords.
+6100	if you can use array keys immediately (without conversion), use isset() because it's obviously much faster than in_array() due to way keys are looked up and because it's a language construct.
+6104	session_start() will need to be included to all the pages where you either want to store the session values or access them.
+6112	this is why you should be calling session_start() for all requests, and why if should be one of the very first things in your script.
+6141	without session_start(); you won't have access to create or update a session variable (in your case $_session['user'])
+6163	i would also sugeest you to stop using mysql_ api since they are depecrated, please switch to pdo or mysqli
+6169	in most cases (it depends of php settings) the session will have limited lifetime.
+6179	you shouldn't use mysql_ functions anymore, they are deprecated, and unsafe (for sql injections),you should have a look at mysqli functions or pdo, personally i recommend learning pdo, as the queries are parametrized and it's very safe, and i like the logic and readability you get with it.
+6203	the entire mysql_query api has been trashed, it's obsolete and the latest version of php no longer supports it.
+6204	you need to move on to something better, and i'd recommend pdo as a baseline.
+6207	with pdo you can name your placeholders.
+6210	placeholder values will be substituted correctly, safely, and most important, consistently.
+6228	foreach creates a copy of each array element, so unsetting $media[$media_key] only unsets from the copy; and you want to unset from the original $data array:
+6233	if you need the keys from each result just loop over $results and for each $result get the keys, using the array_keys syntax.
+6235	explode returns an array where all the items from the string are values and the keys are just numbers starting from 0. take this example:
+6238	if you want to find out if a certain value exists in the array use array_search() .
+6261	you can prevent htmlentities from double encoding by providing false as the fourth parameter.
+6262	also, bare in mind that you can pass an array for matches in str_replace :
+6298	also note that mysql_* functions are deprecated, use mysqli_* instead.
+6313	if you want replace a know, exact substring, you have to use str_replace instead.
+6319	standard mysql_ functions are now deprecated, and for very solid reasons.
+6332	warning 1: your code is vulnerable to xss, you should not print raw user input back to the page, pass it through htmlspecialchars() .
+6334	you should validate the $email that you insert into the headers, or not insert any user input at all into the headers.
+6338	you should use something like pdo to bind parameters to your sql query.
+6343	you have to treat all and any user input accordingly to prevent that, using prepared statements , or some escape function such as mysql_real_escape_string() / mysqli_real_escape_string() etc.
+6346	cookies are sent via http header.
+6363	first of all the way you store your credentials in cookies is very dangerous.
+6379	you shouldn't store the password even if it is hashed in an cookie.
+6420	you can do this with pdo or mysqli , your current version of mysql is deprecated and strongly advised not to use it, instead look into mysqli and pdo which have methods in place for exactly what you want to do,
+6436	but even better is to use prepared statements with query parameters instead of escaping and concatenating variables into sql query strings.
+6442	you have to use mb_strtolower for multibyte strings (this applies to many other string functions of php too, see manual ).
+6443	as explain in the docs , array_unique compares elements as strings by default.
+6454	please be informed that mysql functions are deprecated and not recommended.
+6472	the database usually returns an error if data could not be stored.
+6477	advice: avoid using mysqli_* statement as they are deprecated in recent php versions.
+6478	learn mysqli_* prepared or pdo and start implementing.
+6500	note that you will have to santise the value, mysql_real_escape_string is normally used to do this.
+6501	finally the mysql_* methods are deprectaed and you really shouldn't use them.
+6511	sidenote: learn about prepared statement because right now your queries are susceptible to sql injection.
+6523	however, you ought to use prepared statements in order to make your queries properly formatted .
+6527	i noticed that you're using mysqli to connect db, then you're using mysql for execute query, you should use same lib, try to execute your query through mysqli_query()
+6555	you can use this code..dont use mysql and mysqli combinations.
+6611	for prevent sql injection first you need filter the input, second use pdo.
+6613	as these parameters are usually used internally, there's low (but yet probable) chance to get a direct connection to the database through sql injection.
+6614	in the other hand, $user = $_post['user'] and $passwd = $_post['passwd']; are parameters for a query , which can be subject to sql injection if no validations are applied before adding them to the query.
+6615	in this case, the best approach is using parametrized queries, instead of using concatenation when building sql queries.
+6621	for values which are expected to be a number (integer, float) - you can either use intval($var) for integers or floatval($var) for floats.
+6622	edit: i forgot to mention: the best is to use pdo (php data objects) -> http://de.php.net/pdo
+6625	it is also very suggested to use prepared statements .
+6652	note: the above example uses pdo, which you should really look at using, since the mysql_ functions are deprecated.
+6654	use var_dump($_post['fruit']); to see your array structure and how you can access it.
+6663	in php, casting any string that doesn't begin with a number evaluates to to 0. the 0 exists in your array, so in_array() returns true.
+6664	if you don't want this to happen, set the third parameter for in_array() to true, so it performs a strong comparison (equivalent to === ) and consider the types, too.
+6669	so the answer is: no, the connections will not be shared between and re-used by the mysql extension and pdo.
+6694	and lastly you shouldn't be using mysql_* you should use pdo or mysqli .
+6700	the correct way to access post values is to use the predefined variable $_post (all capitals).
+6701	i would also consider using the htmlentities function to sanitise the incoming data before you display it on your web page.
+6703	it is possible to lookup for more than one string with str_replace like:
+6718	simple, non production code is not allowed on production ( var_dump , print_r , et al.
+6723	you may also want to take a look at krumo which is an amazing replaement for var_dump and print_r by displaying php variables in a structured way.
+6734	use prepared statements (pdo or mysqli) to protect from mysql injection.
+6746	the mysql_* functions are deprecated and if i recall removed as of php 7, which means this code is not future proof beyond php 5x.
+6753	you have to start a session with session_start() before checking th session, and to make sure that the session has been opened with the correct name and value.
+6761	you also could use the mysql_real_string_escape (order of words might be off there).you should switch over to pdo and parameterized queries when you can though, how can i prevent sql injection in php?
+6772	i i completely agree that pdo is good choice to avoid sql injections but, you know at such situations you are unable to debug your queries.
+6774	please stop writing new code with the ancient mysql_* functions.
+6776	instead you should learn about prepared statements and use either pdo or mysqli .
+6802	array_search returns false if $needle is not found.
+6803	false casts to 0 when used as an integer.
+6834	you approach is wrong, you need to have session_start() at the very top of the page, than use a session variable like this
+6841	in php, once the script has finished, every memory that was allocated by that script is freed, so $calendar_id_val is no longer in memory.
+6850	note that the use of sessions is to be recommended, because sessions store the data server-side, whereas cookies are stored on the client's machine.
+6865	if you're outside of a loop and you want to insert multiple items simultaneously then use array_push.
+6872	there is a function mysqli_connect() , which establishes a mysqli connection object in procedural (non-oo) code, as in:
+6923	persistent connections for the mysqli extensions weren't added until 5.3 since they caused headaches before.
+6942	as has already been suggested, try using "date_default_timezone_set" and "date" to get the date in your local timezone.
+6943	use mysqli instead of mysql functions as mysql functions are deprecated escape your strings!
+6944	to avoid sql injection use mysqli_real_escape_string on anything that comes from the request
+6952	as far as i remember the mysql is obsolete so try to use mysqli instead.
+6958	you could use isset() to see if the checkbox has been checked.
+6976	additionally, look into using the mysqli library (or similar) and learn how to parameterize your queries so you can avoid dealing with sql injection later.
+6989	there are tools like fail2ban helping to overcome compatibility issues between different firewalls keeping your php application portable between root servers.
+6990	fail2ban can scan all kinds of log files, even custom ones.
+6993	well, if you don't want xss problems, then using htmlspecialchars() is a good idea.
+7004	you should also look up functions for preventing email injection, and also run strip_tags on every post value to prevent xss attacks on your form.
+7021	add error reporting to the top of your file(s) which will help find errors.
+7022	if you get a notice about a deprecated mysql library, then you may be forced to switching over to either the mysqli_ api or pdo, something you should be using nowadays, as it's deprecated as of php 5.5 and deleted as of php 7.0
+7032	as i stated in comments, you need to start the session first and placed on top before anything is happening or meant to happen.
+7036	you can "salt" the hashes with extra data so if they are compromised, it's value cannot be found (try googling some simple hashed words).. i.e.
+7038	the problem i was having was that if you check to see if a field in the form isset it will always be set once the submit button has been pressed.
+7039	if, like me, you want to check if something has actually been entered in to the field then i would say you need to do an if(!empty) check.
+7056	please remember that the mysql extension is obsolet, and one should use the new mysqli extension or pdo.
+7059	do however note that all other variables must be escaped before appending them to the query, because one of them might contain a string that invalidates the query.
+7073	you should also look the method prepare from pdo to properly set dynamic values in your query instead of building it by yourself.
+7074	edit : according to the php documentation on strings i'm wrong and you can interpret an array between double quotes, sorry for the confusion.
+7114	however - you shouldn't introduce parameters in this way, and the mysql_* functions are deprecated.
+7142	htmlspecialchars () does the minimum amount of encoding to ensure that your string is not parsed as html.
+7155	further, you should sanitize the input, like this:
+7165	as far as i know pdo is completely object-oriented, but you may want to look into mysqli which allows both procedural and oo styles.
+7166	at the start of each page, you should have a call to session_start(); .
+7168	then (when the user places the order) you would scrub the input, to prevent sql injection, and add a new sql query, perhaps something like;
+7174	strpos - find the position of the first occurrence of a substring in a string
+7188	use htmlspecialchars on every other resources, especially for user inputs to prevent security issues.
+7207	in a web application, the only way to share information between users is to store that info, on the server!
+7251	keep in mind that everything in php is case sensitive.
+7301	make use of isset to check if a cookie exists and then try setting one.
+7304	you may use addslashes() for entering apostrophe and as you have already said use stripslashes() for echoing.use addslashes() only if you want to add apostrophes for more escaping functions used mysql_real_escape_string
+7316	session_start must be called before you read from -or write to- the $_session variable.
+7322	for more security use prepared statements.and check if $_post['username'] and $_post['password'] are set too (even if your input fields are "required")
+7328	but really you should use pdo instead of the deprecated mysql_* functions...google pdo, and learn to do prepared statements.
+7353	better yet, learn pdo with prepared statements instead of the deprecated mysql_ functions, which solves the issue of sql injection much better.
+7369	isset() is a boolean function that tells you if a variable is set or not.
+7379	if you need to check whether the query returned rows, use mysql_num_rows .
+7380	you should also consider switching to mysqli, as mysql has been deprecated.
+7386	please always prepare your query, never use a $_post or any other user input value directly in your query to prevent sql injection.
+7395	$ _post or $ _get are two special functions of php that are used to get variables from a user-filled form.
+7402	also use pdo and prepared statements to avoid sql injection.
+7406	also you told that you are new to php, so consider using pdo instead of mysqli_() , than you don't have to worry much about sanitizing your user inputs...
+7430	use pdo to open sqlite databases.
+7435	mysql is deprecated and can lead you to a whole lot of trouble.
+7440	remember that each input's name directly corresponds to the post's array index when it is sent.to easier visualize what you are posting and how the data is sent through, you can do:
+7455	but there's also the advantage of array_push , you can use it to push multiple elements to an array:
+7473	be sure to remember your session_start(); at the top of each page that uses the $_session variable.
+7533	an array could be really helpful when it's a dynamically created form.
+7540	third is a suggestion to use $_request[] when you are not sure about the get or post collections.
+7548	now, implode() has to make a string, so it converts each item in the array it's given to a string before proceeding.
+7552	as mark baker points out in a comment, you can use array_map to execute your callback; reusing $something from above, and breaking it down for clarity:
+7582	single quotes (') are not interpolated.
+7583	also, you should not be using $_post["email"] directly in your query - it's a security hole and open to abuse.
+7598	just unsetting $element will not work, because this variable is not a reference to the arrays element, but a copy.
+7663	also consider using pdo instead of mysqli.
+7677	in php you can use implode funciton, which lets you concatenate array items with the glue string (as first parameter) php (result.php):
+7695	to get every value of array you should iterate over it, with for or foreach :
+7705	isset is the proper choice here -- empty is only intended to examine a known variable to see if it is "emptyish".
+7713	firstly, if that is code to be used in production, please make sure you are escaping your sql parameters before plugging them in to your statement.
+7715	i would recommend using pdo instead as it supports prepared statements and parameter binding which is much much safer.
+7720	you may also be outputting before header, so place session_start(); at the top of your script.
+7723	the wonderful thing about checkboxes is that when you don't have one checked, and you submit a form, nothing is sent to the server.
+7738	as mentioned refrain from using mysql_ functions which as of php 7 (current version) this extension is no longer available.
+7757	if you're having trouble debugging, use var_dump or even in combination with gettype() around the argument you're trying to implode.
+7761	if you use php5 (and you should, given that php4 has been deprecated), you should use pdo, since this is slowly becoming the new standard.
+7762	one (very) important benefit of pdo, is that it supports bound parameters, which makes for much more secure code.
+7768	sidenote: don't use mysql_* functions, they are deprecated as of php 5.5 and are removed altogether in php 7.0. use mysqli or pdo instead.
+7787	whenever you concatenate in a sql query you should be using a prepared statement instead, as it opens you application to sql injection attacks.
+7803	mysqli is the strongly preferred choice as mysql is deprecated.
+7822	if you want to execute several sql statements in a single query, you need to use mysqli and multi-query , and each statement needs to be separated by a semi-colon (;)
+7823	you should also either use prepared statements or at the very least sanitise your inputs, as your code has a huge sql injection vulnerability (how are people still writing php like this?!?
+7826	on the other hand, your code is extremely prone to sql injection attacks, always clean your $_post and $_get input before using it in the query directly!
+7848	try to use mysqli or pdo
+7853	php 7 has removed mysql_* completely.
+7854	1) modify the code to remove references to the mysql extension (and use mysqli or pdo instead), or
+7875	incidentally - the api.php code is vulnerable to sql injection so you ought to be using prepared statements
+7893	you need to call session_start() at the top of each of your scripts
+7906	pps: you should know that you're using the ext/mysql functions, but these are deprecated.
+7908	and if you want to do a more adjustable filtering, i’d use a html parser like domdocument , traverse the dom tree and remove the nodes i don’t want.
+7927	you can use isset function to determine if a variable is set and is not null.
+7933	you can also add an @ before a variable when you want to use it but you can't be sure it exists.
+7947	switch to pdo and use prepared statements to prevent injection.
+7970	use prepared statements in order to avoid mysql injection.
+7976	you should also look at the pdo driver (php data objects), which provides a data access abstraction layer allowing your code to access many more dbms besides and including mysql.
+7987	the warning you're getting is probably a 500 error -- meaning your server is not set up to display errors to you, or you don't have it enabled in your index.php file.
+7988	the error you're getting, but not seeing is: "fatal error: can't use function return value in write context" because you can't use isset on a function.
+8064	since you're using a prepared statement with multiple queries, you need to use emulated prepared statements.
+8071	isset is a boolean operator which returns true or false .
+8073	as a side note, just because the variable is set, does not mean it's not empty.
+8109	1- check if you make session start session_start(); in the begining of your review.php file
+8144	you can add the 'i' modifier in a preg_match pattern to do a case-insensitive search.
+8146	session variables are stored on your server, not on the users computer like a cookie.
+8152	array_intersect_key() is a suitable call to filter an array using another array's keys.
+8177	side note: you should be using either mysqli or pdo
+8225	if you want to extract some data from a string that contains something that looks like a query string, you'll want to take a look at parse_str() .
+8229	while setcookie sends a cookie to the browser.
+8252	what's going on is when you're fetching your rows from mysql, you're essentially getting a bunch of data in an array in the first place, which is why you have to loop through them.
+8262	also, for the target upload directory, you might want to append it with $_server['document_root'] so that the target directory is not dependent on where your script is located, but it's always based on the root.
+8305	next, use prepared statements - it's a security thing (read about sql injection).
+8320	you should use mysqli_connect instead of mysql_connect which is deprecated since php 5.5.0 :
+8322	pdo's constructor takes at most 4 parameters, dsn, username, password, and an array of driver options.
+8323	a dsn is basically a string of options that tell pdo which driver to use, and the connection details... you can look up all the options here pdo mysql dsn
+8358	note that you do have a potential sql injection vulnerability by passing $clear and $useridentity directly into the sql query.
+8368	edit : if you are using mysqli, you can do it in the following way, since mysqli doesn't support arrays as execute() parameter (thanks to jeff in the comments) .
+8375	note :- an useful suggestion is to switch to mysqli_* or pdo is best, because mysql_* is officially deprecated.
+8383	make sure you do similar escaping for all of the input you're using in the query.
+8384	isset returns true or false if a variable is set , it does not return actual variable data.
+8423	however, using mysql_* is highly not encouraged.
+8442	you can use php's $_get array to access url parameters.
+8463	to get your selected value, you have to reach the $_get or $_post supertables after the user submits the form.
+8467	isset() returns either true or false if the post variable exists or not.
+8475	this is a strong argument in favour of pdo because products based on it are likely to run faster in more environments.
+8487	if you do not want the webpage to load, when submitting, you'll need some javascript.
+8494	you can use (in_array) function to check if var in array or not
+8505	if you are using session_start(); correctly (at the begining of your document), your code is fine.
+8508	also as a side note, you should use mysqli instead of mysql
+8512	regarding your second question: recall that $_get will contain the result of a form using the get method , while $_post will contain data from post method forms.
+8513	$_get purpose is to contain url parameters, if they exist (to be precise, a get method form will pass all its parameters via the url).
+8544	use prepared statements , or pdo with prepared statements , they're much safer .
+8546	add error reporting to the top of your file(s) which will help find errors.
+8549	we'd really want to check if the return from prepare is false, we don't want to call bind_param or execute on that.
+8550	the use of htmlentities assumes that the contents of the review column does not contain any html markup that should not be escaped/encoded.
+8553	using prepared statements removes the need to sanitize user input, as harmful input is not substituted into the query directly.
+8554	there are some good tips for using prepared statements in many different scenarios, as well as towards the bottom, there is an explanation on how prepared statements prevent sql injection.
+8564	never, ever, use get/post variables directly in the query.
+8590	additionally, you should not be using the mysql - library it is insecure, and is deprecated - use mysqli or pdo.
+8593	if you want to get an object, you have to pass an associative array to json_encode :
+8599	use mysqli_* or pdo to prevent sql injection attacks add some parentheses to the query.
+8605	do not use mysql functions, because they are deprecated.
+8606	avoid sql injection by escaping your variables.
+8607	is_float() checks the type, not the content of the variable where is_numeric() only checks the value.
+8620	whenever data is coming from user, sanitize it(take special attention if its storing in database.).
+8627	prepared statements will protect your database against sql injections.
+8634	you also should move away from mysql_ as the mysql api is deprecated.
+8635	use pdo or mysqli with prepared statements to avoid sql injections.
+8637	for debugging purposes, i suggest you print out the array if you're having trouble in the future using: print_r($auser) .
+8641	to prevent sql injections and make escaping input easy, use prepared statements .
+8642	if you don't want html for an input, you can optionally use strip_tags to completely remove the html from the input and then validate it further.
+8643	when you want to display a value from the database that came from user input, use htmlspecialchars or htmlentities so that any html tags will be converted from &lt; to &amp;lt; so the output isn't parsed as html therefore allowing people to put malicious links or script tags on your pages.
+8683	the pdo statement prepares the query to avoid sql injections.
+8716	sort() returned values are true or false .
+8721	knowing that, and having in mind that in php the value of an assignment expression is the value assigned.
+8730	isset checks if a value is set and returns a boolean, so $num1 and $num2 will be either true or false.
+8734	the problem with $_request is that if there are variables of get, post and/or cookie, one will override the other in that superglobal.
+8735	it's semi-predictable what values you end up getting if you try to access $_request .
+8736	the only thing is that $_request will contain values passed in get and post commands, and cookies values.
+8737	so if you want to process only values passed in the url, you will probably want to use $_get ...
+8745	i'm not going to tell you how to do that using mysql_ because only a fool uses mysql_ these days.
+8746	please, please use pdo or mysqli_ .
+8768	i know you weren't explicitly asking about security, but escape your user fields!
+8769	you should never ever directly use $_get or $_post variables in your queries.
+8783	try avoid using $_request for things like sending e-mail.you would think that a form has to be submitted in order to send a mail.but with $_request , you can also open the page directly, as in domail.php?your_name=somename&amp;your_email=someone@example.com
+8788	then you should note that even with mysqli::real_escape_string() , it's not secure against sql injection, and that you should use parameterized queries.
+8792	also note that storing passwords in plain-text is a big no .
+8793	you should use functions like password_hash() / password_verify() to properly and securely store your users passwords.
+8820	i think you mean $globals (notice the s) which is a suber global variable and therefore can be accessed from anywhere in the php script (also from within functions or methods).
+8852	first, you should know that the mysql extension is deprecated, you should use mysqli or pdo_mysql .
+8864	prefer pdo to old obsolete mysql_* functions.
+8865	if you persist, please use mysql_fetch_assoc() instead of mysql_fetch_array(), this is lighter and you get what you want.
+8894	no sanitation is necessary for pdo because it uses prepared statements.
+8917	when outputting to html, use htmlspecialchars to avoid html injection or plain syntax problems and afterwards use nl2br to format line breaks specifically for html.
+8919	additionally you're using backticks around the value you're searching for $_session['user_id'] backticks are for column names, you should use ' around values.
+8920	suggest you to use pdo http://in1.php.net/manual/en/ref.pdo-mysql.php or mysqli extension because php 5.5 wont be supporting mysql extension any more
+8928	only isset is a language construct which checks a session variable or post variable is set.for adding another variable also you need to use &amp;&amp; isset($_post['variable'])
+8932	also, i suggest you to test if the variable is not empty, because fields like ' input text ' will always exist even if it is empty.
+8933	you can use empty function to test if it exists and not empty
+8938	use of old mysql_* php functions is discouraged.
+8939	use of pdo library is preferred.
+8942	and consider using mysqli or pdo (and use parameterized queries), as mysql_* are deprecated!
+8943	to me this has to be updated to type : 'post or get' because php's $_request handles both, so you can change your type to this:
+8949	the problem is codeigniter does not accept array of pairs when unset session data .
+8956	they behave differently because in sort the $myarray variable is passed by reference, meaning the variable itself is operated on whereas in array_reverse() the variable is not passed by reference.
+8970	count() can only return the number of items in an object if the object interfaces with the countable interface which an undefined variable does not which is causing the error.
+8981	in the case of pdo::query() the return type is either pdostatement or bool, although the prototype in the documentation says something different:
+8986	secondly, if you want to get rid of any danger of sql injection, it would be much easier to use prepared statement, so something like the following is all that is needed.
+8987	pdo::exec() returns the number of rows not an object that you can fetch on.
+8995	yes, shared state is usually stored in a database, although state may also be stored in the local file system.
+8998	regarding your second question, pdo protects you against sql injections.
+8999	you still have to escape html before outputting it, to protect from js code injection
+9002	in php you must need to start session using session_start() then only you can user session variables.
+9019	the sql stuff is fine, parameterised queries are the best-practice approach to prevent sql injection.
+9036	i'd use isset() instead to properly check if the form was submitted or not.
+9056	of course, you have to add session_start() at the top of the page!
+9073	if you are already using pdo the proper way as documented using prepared statements , it will be enough to protect you from mysql injection.
+9076	and this code is secure from myql-injection thanks to pdo and the power of prepared statements.
+9077	it is worth noting that you should pass a charset=utf8 as attribute, in your dsn as seen above, for security reasons, and always enable pdo to show errors in the form of exceptions.
+9079	but, using prepared statements as shown above will always be safer, than using any of the functions that start with mysql_
+9104	back to injection protection... to protect against injection without moving to prepared statements via mysqli or pdo, use mysql_real_escape_string() in place of htmlentities() ;
+9109	session_destroy will delete your complete session.
+9110	if you want to delete particular session value use unset function, somewhat like this
+9124	and remember, a get request should be used to retrieve, and a post request should be used to create.
+9135	joining up raw bits of text and passing them on to your database to process is not a good idea.
+9145	there are esoteric stateless solutions where you can do this but with the data encrypted or cryptographically signed, however the simplest solution is to use sessions - add session_start() at the top of all your pages and any data you want available across requests can be stored in the $_session superglobal.
+9154	$_server["remote_addr"] is the best you can do to find out the client's ip address.
+9156	as pointed out in the comments, you really should start using mysqli instead of mysql.
+9162	an important thing you should never do is to insert values directly into the database.
+9168	so, first of all, correct (see the quotes in array indexes) and escape (as @footy already told you) your query [insert "better using prepared statements" phrase here]:
+9202	in the php pages you need to access session variable add session_start() after the starting &lt;?php code
+9204	also, another option is to switch to pdo , which is a bit nicer, as it supports named parameters and more databases.
+9233	make it a goal mitigate the pain of making changes in the future: a global is dangerous because it's hard to manage in a single spot.
+9248	if something fails, then there most certainly was an error.
+9257	better yet would be to use named placeholders and pdo.
+9258	using pdo means you don't have to worry about things such as sql injection, and it allows for far cleaner sql statements, you don't have to be throwing values from php directly into the sql.
+9264	also your code is subject to sql injection - use mysql_real_escape_string before the query:
+9265	so as long as you don't eval() user input, you're safe with sessions.
+9303	also you could install the php module xdebug which could modify the output of var_dump for better readability: http://xdebug.org/docs/display
+9321	second, you need to check for errors after every prepare() or execute() :
+9356	with isset() you check if the certain $_post parameters are set, but not validated.
+9376	pdo (and mysqli) bring prepared statements and parameter binding which is far superior to query string concatenation (which is what you're using, sort of).
+9382	better is to use pdo as mentioned above, mysql_ can be used "safely" on &lt; php 5.5.
+9392	as mentioned in the comments, you should be using prepared statements to protect you from mysql injection.
+9407	mysql_query is deprecated , please consider either mysqli or pdo.
+9413	also as zan mentioned, don use mysql_* functions, but mysqli_* or pdo...
+9418	don't use mysql_* commands, try pdo ou mysqli instead.
+9425	if you send text, but the column is int then mysql will attempt to coerce the data into int .
+9428	bindparam accepts the value by reference .
+9437	opening note: mysql_ has been deprecated and replaced by mysqli .
+9438	the use of mysql_ is highly discouraged.
+9439	the use of pdo is much better and safer.
+9473	your session_start(); should come at the beginning of the file in login.php .
+9476	you should use quotes in array index : $_session[custno], $_session[name] should be $_session['custno'], $_session['name']
+9480	the mysqli extension does support mysqli_multi_query() but i still recommend doing one query at a time.
+9489	also have a look on prepared statements for sql queries, you do not want to have possible injections.
+9505	warningisset() only works with variables as passing anything else will result in a parse error.
+9506	for checking if constants are set use the defined() function.
+9511	you have to use array_search() instead of in_array() to get the key of the found element.
+9523	move to mysqli or pdo_mysql , for new projects.
+9534	you're better off using pdo or mysqli prepared statements you should always read the manual - password_verify() , it states clearly that you compare the "user inputted password" against the hashed version which is stored in your database.
+9563	i would also like to point out the use of prepared statements here, as they are the only way to properly defend against sql injections .
+9565	you should start session before any output.change your code to:
+9574	for extra safety, you should store the remote address that was used to login, and compare it on each page load.
+9593	you should use isset to check if a variable is set, that's what it is for.
+9608	array_diff returns elements in the first array that are not in the second so have $b before $a the arrays contain other arrays so you probably want to use array_column to get specifically the teacher_name column
+9630	make sure you're calling session_start() , always and only once (ie.
+9635	i would recommend to go to updated and newer mysqli as mysql will probably disappear in some time from php at all.
+9643	one of the advantages of pdo is that it allows parameter binding, which protects you from sql injection.
+9647	use array_slice() to get part of an array.
+9649	call htmlspecialchars() on any untrusted strings you are sending to the browser as html.
+9651	call mysql_real_escape_string() on any strings you are putting directly into sql statements.
+9666	secondly, codeigniter does not utilize php's native $_session , they implement their own.
+9685	if starting something new from scratch, best use a database wrapper that supports prepared statements like pdo or mysqli.
+9695	your present code is open to sql injection because you are not escaping any data input .
+9701	unfortunately, array_walk_recursive is designed so, that it can't edit keys .
+9705	and use pdo or mysqli as suggested in the comments.
+9706	php's isset checks to see if the referenced variable has a value assigned - if it does, echo it.
+9731	you should be able to use ifnull to convert null s to (say) empty strings in your where clause.
+9734	all i needed to do was add make sure the session_start() was at the start of each page that used it before the output, other wise it wouldn't work.
+9736	also use mysqli instead of mysql to avoid sql injection .
+9815	mysqli comes with an object-oriented interface out of the box.
+9823	i haven't use htmlentities before, but it seems like a bit more robust version of urlencode (which i use a lot).
+9827	your code is prone to sql injection , you are still using mysql even though it has been deprecated, you should use either mysqli or pdo with prepared statements.
+9846	php treats empty or null variables as "false" so you don't have to check the $_post variables again, after you assign them to your local variables.
+9887	first, the mysql api you are using is deprecated and will eventually be removed.
+9888	it is recommended you switch to mysqli or pdo for any new development.
+9889	you must then bind the paramter to your select statement.
+9890	here is why it would be best to switch to mysqli or pdo because the mysql_* functions in php do not support prepared statements and parameterized queries.
+9911	mysql methods are depreciated in php, try to use pdo extension.
+9933	another approach is to use array_key_exists to check for the existence of an array key.
+9958	if your other script happens to be using this word as a column reference, you will need to set it inside backticks, since key is a mysql reserved word .
+9959	add error reporting to the top of your file(s) which will help during production testing.
+9960	plus, i recommend you use mysqli_ functions with prepared statements , or pdo with prepared statements .
+9964	using $_cookie does not access the client's computer to get the current cookies in real time.
+9966	you won't be able to detect those changes until the next request for the page, when the browser will send the cookies again.
+9971	you should not use mysql_ as it is outdated and will be removed in future versions of php.you should switch to mysqli_ or pdo .
+10006	like the call to session_start , the call to session_regenerate_id should be done at the beginning of the script, before anything is sent to the browser.
+10020	better yet, learn pdo instead, as, unlike mysqli, it's already a ready to use database access class, with it you don't need functions like processrowset, for example.
+10023	the $_post identifier is actually an array, so the brackets should be square brackets.
+10026	also, if your users are logging out, you should also delete/invalidate their session variables.
+10036	also, if you have any other code in this specific page, make sure you have exit; after the header() function to prevent it from executing before redirection.
+10037	since you are using pdo (a very good job there =) ) you can't call mysql_* functions.
+10038	you need to pass pdo::fetch_assoc as parameter to be able to retrieve the data using named indexes.
+10051	and yes, you can use the variable directly in double quotes ( " ) so that is why i did not use .
+10055	you don't need to use htmlentities before storing data in the database.
+10057	only use htmlentities on strings as you echo them in html output (whether you fetched the string from a database or from some other source).
+10061	if you just want to protect you from sql injections, use mysql_real_escape_string for data that is used in mysql queries.
+10065	i may be wrong but i think the only way to unset the element in the array would be to look up the index that matches the value referenced by the variable you have, then unsetting that element.
+10067	however, keep in mind that this is not super efficient because each time you need to unset an element you have to iterate over the full array looking for it.
+10071	when you unset the reference, you just break the binding between variable name and variable content.
+10077	if you're using strpos to exclusively test for the existence of a substring, you have to use the strict === and !== operators (note the extra =), which not only compare values but types as well, where 0 !== false will evaluate to true.
+10078	integer 0 is not strictly equal to boolean false, even though they have the same value of 0.
+10097	yes but htmlentities() is good for sending data as output to the browser, not for storing it into the database (as the data from the db might be used for something other than a web page).
+10099	in html, the value of the input will be passed to php script will be based on the name attribute.
+10128	instead of doing the session_start in each page, make a common.php file and include this file in all the required pages.
+10129	also, you need to make sure there is no white space before session is started, otherwise it would throw the header already sent error!
+10133	preg_match() can only accept strings as pattern.
+10141	do a var_dump() on your parent::$db and make sure that the object is not actually empty.
+10164	the dsn specifies (amongst other things) the hostname and database, using host and dbname elements respectively; whereas authentication credentials are supplied as subsequent arguments to the pdo class constructor:
+10194	also, as outis noted, keep in mind that you have the option of using prepared statements instead of just raw sql queries.
+10202	you should be using php pdo library http://php.net/manual/en/book.pdo.php or at least mysqli http://php.net/manual/en/book.mysqli.php
+10232	yes, since you’re putting it out into html you should use encode html’s special characters appropriately with htmlspecialchars :
+10270	you should switch to mysqli_* or pdo since mysql_* functions are deprecated.
+10280	array_filter is used for filtering out elements of an array based on whether they satisfy a certain criterion.
+10283	what you're looking for is array_map , which modifies each element in an array by running the callback over it.
+10284	on windows, the php_eol will default to \r\n , while on linux it would be \n only.
+10290	i can see that the timeout happens while using your links, though i think the problem happens somewhere else.
+10295	you shouldnt use the mysql_* functions in php anymore as they have already been removed from php7 and will not return from what i understand.
+10298	you call session_destroy() the user deletes the cookie from their browser the session expires based on the session expiration time defined in php.ini a new page is visited but the session_start() command is not called (once session_start() is called, then the session will be restored, bringing any $_session[] variables along with it)
+10305	not only are mysql_ functions deprecated and no longer being maintained, partly due to the security risk they allow by the use of sqlinjection, they also lack also object oriented capabilities.
+10306	the best secure way of connecting and handling database queries that exists now is, either via the mysqli or pdo interfaces.
+10311	if you just want a list of the names of the variables, just do var_dump(array_keys($globals)) .
+10320	$_post or $_request will work, although the latter may not be wise to use because depending on the php configuration, it may include cookie values.
+10322	in particular, sql uses and rather than &amp;&amp; .
+10324	mysql_real_escape_string() is used to prevent sql injection .
+10325	if you were using either the mysqli extension or pdo, you would have prepared statement functionality available to you, which you should use instead.
+10368	add error reporting to the top of your file(s) which will help find errors.
+10369	use mysqli with prepared statements , or pdo with prepared statements .
+10400	inserting into the database could be much easier and safer using prepared statements.
+10411	one is to use array_values to re-index the array:
+10416	there are not any predefined session variables (try doing a var_dump($_session) if you want to check for yourself).
+10422	session variables are useful for persistent data.
+10423	you use session_start(); at the beginning of each file that you want toaccess the session, and you can retrieve that data again.
+10434	you should also be safely binding your user-input values to the queries to prevent sql injection and fully utilize the pdo library
+10437	one nice feature of pdo is that the pdostatement implements the traversable .
+10442	you have to set the cookie before any output to the browser.
+10477	and pathinfo is probably better to get the file name extension, so:
+10479	the other good news is, php got a builtin function to search whether a value exists in an array of values ( in_array ):
+10486	if any part of your sql statement comes from a request or form submission by the client, you need to sanitize/escape it.
+10490	and you have an sql injection error, you should switch to pdo (or mysqli) and prepared statements with bound variables.
+10518	if you try to find a string from another string, you can strpos() .
+10522	then you can use session_destroy(); to end their session.
+10524	otherwise you can use unset($_session['user_id']); to unset a single session variable
+10537	to create an an array, you need to declare it using array() feature.
+10571	variables from an html form passed as part of the url get put into a $_get array by php.
+10590	furthermore, i don't think you should be adding slashes to the content and directly insert the values in a query, instead consider using parameters.
+10591	read up on php data objects (pdo: http://php.net/manual/en/book.pdo.php ) which is a very nice and safe (if used properly!)
+10593	magic quotes have been deprecated for a long time.
+10626	try to add session_start(); at the top of the file right below &lt;?php where u defined the index() function, if i'm right the sessions didn't even start (idk), but try to add it..
+10627	you can use urlencode , this will convert any spaces to + .
+10633	your code would not be considered insecure but you really shoud ditch the mysql_* library in favor of pdo or mysqli and use prepared statements where user input is needed in the query.
+10642	also, a better way to display the contents of your array is with print_r or var_dump .
+10655	htmlentities() is not a guaranteed way to build legal xml.
+10667	you need to have a try block before you can add a catch block.
+10670	you need to learn about sql injections and also about securing your passwords, use mysqli prepared statements / pdo what ever you find easy to learn
+10698	first of all you should not use the mysql_* functions of php anymore.
+10703	strpos tells you the position of the search string if it's there, and false if it isn't.
+10706	your code is subjected to sql injection attack, as you directly allow post values to be inserted in your query.
+10731	php works server-side, so once the html reaches the client it cannot modify it.
+10733	to change the id of the body dynamically using jquery (which is the easiest way), you can do
+10734	note :- mysql_* has been deprecated use mysqli_* or pdo
+10735	also you should format all strings with mysql_real_escape_string() as this prevents hackers being able to attack your database by passing sql in the string.
+10739	try using mysqli instead of mysql (depreciated) in php, you can also use pdo, however pdo is not as comprehensive and upto date as mysqli, and due to this is slightly slower.
+10740	the only advantage of pdo over mysqli is that pdo also works with postgesql, so switching database engine is easier, however the sql between mysql and postresql differ slightly, so it's not that easy.
+10742	make sure you have session_start(); where page starts, additionally you may create unique index on email column in users table.
+10751	make sure that you call session_start() at the top of your page, before you have outputted any html to the page.
+10754	you can then access them on any other php page with the session_start(); code on top.note however that this session data gets deleted when the user closes his/her browser.
+10757	1) stop using mysql_ functions and use only mysqli_ functions (or pdo ) .
+10758	mysql_ php funtions are deprecated and no longer supported (and hasn't been for 5+ years!).
+10766	basically you specify an array to array_unique and it gives you unique items out of the array.
+10774	also, sending the secret $number through form is not nice, you might want to read about php sessions
+10777	if you're a beginner, please don't put effort in deprecated language-parts like the mysql_ extension.
+10779	use mysqli or pdo with prepared statements and bind your inputs to parameters.
+10781	array_slice() always returns an array - if there are no elements to return for its given offset, array_slice() returns an empty array.
+10808	use htmlentities to convert all applicable characters to html entities
+10809	ajax is the best way to accomplish what you are looking for also your code is extremely vulnerable to sql injection i suggest doing your homework on pdo prepared statements to help safeguard against it.
+10825	when you are using functions like mysql_select_db and mysql_query it basiaclly means that you are using a deprecated mysql style.
+10830	use mysqli_* instead of mysql_* as it is deprecated.
+10837	prepared statements (via mysqli or pdo) can be useful if you are doing lots of high volume queries that all use the prepared statement.
+10838	the prepared statements are faster, additionally you don't have to worry about things like escaping data with prepared statements but they take a bit of code overhead so for a simple app sometimes it's not worth using prepared statements and using the old mysql_* functions are easier for the intended purpose.
+10839	pdo supports more than one database backend.
+10854	you did protect from mysql injection, but the string you stored is way off from its original format.functions such as strip_tags, htmlspecialchars and trim should be used when you are pulling the string out and echoing it.
+10860	i think you should store the username and password as it is and do htmlspecialchars only when displaying them.
+10917	if you want to debug php, i suggest you use var_dump (or print_r ), this will show you if you have an array or an object.
+10918	a javascript console will always show object, and is not very useful.
+10940	call htmlentities (or, usually better, htmlspecialchars ) only at the point where you're taking some plain text and concatenating or echoing it into an html page.
+10942	call mysql_real_escape_string only at the point you insert plain text into an sql string literal.
+10958	$_server is an array containing information such as headers, paths, and script locations.
+10960	and at the end include_once is added to eliminate duplication of included file.
+10962	do note that you are using mysql which is deprecated so it is recommended to switch to mysqli
+10979	you probably want to call session_start() before the $_session variable will be available.
+10980	note: mysql api is deprecated as of php 5.5.0. so, it's highly recommended to use mysqli api for newer developments.
+10999	mysqli_real_escape_string() is possibly doing the " escaping " as you require, however " is adding slashes to my text " is not what mysqli_real_escape_string() does.
+11012	you have to start the session using session_start() .
+11017	but note that the mysql extension is deprecated and should therefore not be used in new code.
+11021	this happens because when you don't fill anything in the fields, you receive an empty string.
+11023	since you're utilizing mysqli use prepared statements instead of interpolating query strings, which leaves your code wide open to sql injections.
+11033	another thing, don't use addslashes() to secure queries, but use your library's dedicated function, such as mysql_real_escape_string() for mysql.
+11034	or better use query bindings with prepared statements and parametrized queries.
+11037	if you want to interpolate a variable into a string, you have to use double quotes, not single quotes.
+11055	now, on your test.php file, if you add the session_start at the top of the page you can access that variable: $_session['id'] .
+11085	try using print_r or die to debug the value of the variables.
+11087	also, if working with $_session variables, make sure to have session_start() on top of each page where you need to access $_session variables.
+11128	use an auto-increment for the primary key of your table (the id i assume); switch to pdo or mysqli and prepared statements (the mysql_* functions are deprecated); add error handling.
+11129	using pdo or mysqli it is extremely easy to have your database calls throw exceptions so you will know exactly when and what goes wrong.
+11150	only checked checkboxes are sent to the server.
+11164	you are using array_push which adds elements to the end of the array.
+11165	you should be using array_unshift, which will prepend new items to the beginning of the array.
+11171	this works because array_unshift puts elements at the beginning of the array, therefore the new sub-array will always be element 0.
+11191	you should never use values you get from a user ( $_get , $_post or $_request ) without sanitizing them.
+11213	you need to put the url inside the action attribute that does the form processing, not the function:
+11217	but this is open to sql injection, another way to do safer queries is to prepare them:
+11239	explode is used to create an array from a string.
+11260	finally, i wouldn't be doing my duty as a so answerer if i didn't point out that the mysql_xxx functions are deprecated and should not be used in any new code.
+11281	note that the above doesn't check for bogus input (always a good idea to validate input server-side as well as client-side).
+11282	aside from that, mysql_* functions are deprecated, move to mysqli_* if possible.
+11284	and mysql_ functions has been deprecated since 5.5.0, you should port your code to pdo or mysqli , you'll find an excellent guide here http://wiki.hashphp.org/pdo_tutorial_for_mysql_developers
+11292	first step to fixing this: don't use mysql .
+11293	instead use mysqli or pdo and utilize prepared statements .
+11294	firstly, please use something like pdo or mysqli's prepared statements.
+11297	but first; as others have pointed out and it's been said time and time again, the use of mysql_ is being deprecated and will be deleted in the very near future.
+11298	therefore using mysqli_ and/or pdo is strongly and highly recommended.
+11324	you should also be using something other than mysql_* to interact with your database, for example pdo :
+11340	array_multisort is used to compare elements from different arrays (or sub-arrays) at the same time.
+11341	you want to compare elements of only one array, so you use usort .
+11351	also, you should validate your $_post variables (at least use mysql_real_escape_string , better use mysqli or pdo ).
+11358	(+) there are libraries like htmlpurifier which allow you to only sanitize specific elements.
+11360	way to treat them: escapeshellcmd + don't use user input for something like directory or filenames on your server!
+11368	your database knows best which charakters to escape and how to treat which data, so just use the escaping and quoting functions provided by your database-api or better: prepared statements (just use them always when interacting with the database + userdata) as they work differently then normal queries and you don't have to think about escaping and quoting.
+11375	since most xss attacks rely on &lt; to allow a javascript execution, it is negated cause the &lt; character is not allowed in an email address.
+11382	you must pass a connection whenever you make a query when you're using mysqli.
+11402	add error reporting to the top of your file(s) which will help find errors.
+11406	if $phone = null (like if the value wasn't posted), $phone == '' evaluates as true.
+11407	because '' is loosely equivalent to null .
+11411	also you should really look into replacing the deprecated mysql_* functions in your code with mysqli or pdo equivalents.
+11439	so, if there are really no dynamically changed parameters, there is no use in preparing and executing.
+11465	first off you should be using the intval() function php provides to safely cast a string as an integer.
+11466	secondly if you want numbers like 0.01 or 0.999 you need a float , integers do not have decimals, so you should actually be using floatval() .
+11471	first you have to check to use mysqli or pdo instead of mysql .
+11473	when using mysqli you should use mysqli_prepare and mysqli_stmt_bind_param instead of using the php variables directly in your sql string.
+11484	similarly when outputting your variables like $row['site_name'] always make sure you escape them for html, for example using htmlspecialchars($row['site_name']) .
+11491	first, don't use mysql_ functions, as they've been deprecated since php 5.5, and removed in 7.0. use mysqli_ functions instead, or pdo.
+11515	the / is making it post to the root of your website, not the current url.
+11516	$_server['php_self'] contains the path of the current script relative to the document root.
+11524	$_cookie is read only array, you need to use setcookie like
+11526	you have to call session_start() at the top of each of your script in order to actually create a session
+11541	also, the mysql_* extension is deprecated as of php 5.5.0, and will be removed in the future.
+11545	if you are really sure that your code works (even if this is a bad example), use error_reporting(e_error); to remove notices.
+11546	an undefined index error is issued when you are trying to call an index of an array, when it is not defined.
+11547	always check the existence of a key in an array before trying to call it:
+11548	ps: i noticed that you're using mysql_* functions, which are deprecated.
+11550	additional info if required:- make sure you use session_start() at top of your page if not you may face with an headers already sent error / warning which again can be fixed by output buffering ob_start()
+11555	also, if you are new to php, i would recommend the pdo libraries instead of mysqli, they are a little easier to work with once you start fetching results.
+11563	since php is weakly typed, a function expecting an integer will happily run if you pass it an array, but will likely crash and burn with errors all over your logs or the screen.
+11584	if you have not included the function then you will get a fatal error in the execution of the script.
+11589	however, it will not allow you to bind any data to the executed sql.
+11605	the mysql extension is deprecated since php 5.5.0 and mysqli (note the i at the end) or php pdo should be used instead.
+11631	so your best bet is to include a few isset checks before referencing $_get parameters, for example:
+11635	you could always do var_dump($_get) to see all of the information in the query params for the specific code.
+11646	i would recommend adding comments to those closing brackets so that you would be able to see which bracket closes which statement.
+11658	you can use array_keys() to extract the keys from an array.
+11659	if there is certain words or characters you want to strip out, the easiest way to do it would be to store an array of those words or characters and use str_replace on the string before you explode.
+11663	cookies should be set before browser output as they are part of the http header.
+11669	to use sessions, make sure session_start(); is placed before retreiving or storing and make sure nothing has been printed to the screen, nor any headers have been output before issuing a session_start();
